@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subir Archivo CSV</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" type="text/css" href="/css/index.css" />
+</head>
+<body>
+
+<div class="details-container">
+  <h1>Subir Archivo CSV</h1>
+  <button id="botoncsv">Subir CSV</button>
+  <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data" style="display: none;">
+    <input type="file" id="fileInput" name="file" accept=".csv" required>
+    <input type="hidden" id="cicloInput" name="ciclo">
+    <input type="hidden" id="semanaInput" name="semana">
+    <button type="submit" id="submitFormBtn">Subir</button>
+  </form>
+</div>
+
+<script src="/js/csv.js"></script>
+</body>
+</html>

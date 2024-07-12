@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css" />
+</head>
+<body>
+    <div class="asesors-container">
+    <div class="logo">
+      <img src="/imgs/logo2.0.png" alt="Logo" />
+    </div>
+        <h1>Lista de Asesores</h1>
+        <ul id="listaAsesores">
+            {{#each advisorNames}}
+                <li>
+                    <a href="/orders/{{this.AsesorId}}?ciclo={{../ciclo}}&semana={{../semana}}">{{this.Asesor}}</a>
+                </li>
+            {{/each}}
+        </ul>
+        <button id="botoncsv" >Cargar otro Archivo</button>
+    </div>
+</body>
+<script>
+    document.getElementById("botoncsv").addEventListener("click", function() {
+    window.location.href = "/uploads";
+});
+</script>
+</html>

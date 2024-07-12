@@ -1,0 +1,286 @@
+/* Estilos generales para todo el documento */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  padding: 20px;
+}
+
+/* Contenedor principal de detalles */
+.details-container {
+  max-width: 1000px;
+  margin: 10% auto;
+  background-color: #fff;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo img {
+  max-width: 150px;
+  height: auto;
+  margin: 0 auto 10px;
+}
+
+
+/* Estilos para información de ciclo y asesor */
+.ciclo-info {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.ciclo {
+  text-align: center;
+}
+
+.ciclo h4,
+.ciclo p {
+  margin: 0;
+  font-size: 1em;
+}
+
+.ciclo h4 {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.ciclo p {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 1.6em;
+}
+
+/* Estilos para información del asesor */
+.asesor {
+  text-align: right;
+}
+
+.asesor h1,
+.asesor h4 {
+  margin-top: 20px;
+}
+
+/* Estilos para encabezados y títulos */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Estilos para tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  text-align: center;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Estilos para botones */
+button {
+  align-items: center;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.edit-item {
+  background-color: #4caf50;
+  color: white;
+}
+
+button.delete-item {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Estilos específicos para botones con IDs específicos */
+button#botonadd,
+button#botonpdf,
+button#botoncsv,
+button#botonadvice {
+  display: inline;
+  width: 40%;
+  padding: 15px;
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: center;
+}
+
+button#botonadd {
+  background-color: #2196f3;
+  color: white;
+}
+
+button#botonpdf {
+  background-color: #377002;
+  color: white;
+}
+
+button#botoncsv {
+  background-color: #f3aa21;
+  color: white;
+}
+
+button#botonadvice {
+  background-color: #2196f3;
+  color: white;
+}
+
+/* Estilos específicos para la tabla de detalles de pedidos */
+#order_details_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  text-align: center;
+}
+
+/* Estilos para contenedor de asesores */
+.asesors-container {
+  max-width: 800px;
+  text-align: center;
+  margin: 10% auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para listas */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+ul li a {
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+#listaAsesores a:visited::after {
+  content: " ✓"; /* Símbolo de tilde */
+  color: green; /* Color del símbolo */
+}
+
+ul li a:hover {
+  background-color: #0b7dda;
+}
+
+
+/* Personalización de SweetAlert */
+#modalForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+#modalForm label {
+  display: block;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+
+#modalForm input[type="text"],
+#modalForm input[type="number"] {
+  display: block;
+  width: 50%;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+
+/* Eliminar las flechas de incremento/decremento en navegadores Webkit y Firefox */
+#modalForm input[type="number"]::-webkit-outer-spin-button,
+#modalForm input[type="number"]::-webkit-inner-spin-button,
+#modalForm input[type="text"]::-webkit-outer-spin-button,
+#modalForm input[type="text"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+#modalForm input[type="text"]:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+@media print {
+  /* Estilos específicos para impresión */
+  .header {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .ciclo,
+  .asesor {
+    margin: 10px 0;
+  }
+
+  .ciclo p {
+    display: block;
+    background-color: transparent;
+    border: none;
+    font-size: 1.2em;
+  }
+
+  .asesor h1,
+  .asesor h4 {
+    font-size: 1em;
+  }
+}

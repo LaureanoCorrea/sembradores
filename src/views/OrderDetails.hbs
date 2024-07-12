@@ -1,0 +1,127 @@
+<html lang="es">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalles del Pedido</title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <div class="details-container">
+        <div class="header">
+          <div class="logo">
+            <img src="/imgs/logo2.0.png" alt="Logo" />
+          </div>
+          <div class="asesor">
+            <h1 class="name">{{Asesor}}</h1>
+            <h4 class="level">{{NivelAsesor}}</h4>
+          </div>
+        </div>
+        <div class="ciclo-info">
+          <div class="ciclo">
+            <h4>Ciclo:</h4>
+            <p class="numero-ciclo">{{ciclo}}</p>
+            <h4>Semana:</h4>
+            <p class="numero-semana">{{semana}}</p>
+          </div>
+          <h5 class="alias">Alias para hacer transferencias: sembradores.bagues</h5>
+        </div>
+        <table id="order_details_table">
+          <thead>
+            <tr>
+              <th>Cod</th>
+              <th>Nombre</th>
+              <th>Cant</th>
+              <th>Puntos</th>
+              <th>$ Pub</th>
+              <th>$ x Cant</th>
+              <th>$ x Nivel</th>
+              <th>Ganancia</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each Productos}}
+              <tr
+                data-asesor-id="{{AsesorId}}"
+                data-pedido-id="{{PedidoId}}"
+                data-item="{{_id}}"
+                data-nivel-asesor="{{NivelAsesor}}"
+              >
+                <td>{{getField this "Codigo de Producto"}}</td>
+                <td>{{getField this "Nombre de Producto"}}</td>
+                <td class="cantidad-unidades">{{getField
+                    this
+                    "Cantidad Unidades"
+                  }}</td>
+                <td class="puntos">{{getField this "Puntos"}}</td>
+                <td class="precio-publico">{{formatNumber
+                    (getField this "Precio Público")
+                  }}</td>
+                <td class="precio-x-unidades">{{formatNumber
+                    (getField this "Precio x Unidades")
+                  }}</td>
+                <td class="precio-x-nivel">{{formatNumber
+                    (getField this "Precio x Nivel / Categoria")
+                  }}</td>
+                <td class="ganancia">{{formatNumber
+                    (getField this "Ganancia")
+                  }}</td>
+                <td>
+                  <button class="edit-item" data-item="{{_id}}">Editar</button>
+                  <button
+                    class="delete-item"
+                    data-item="{{_id}}"
+                  >Borrar</button>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+          <tfoot>
+            <div>
+              <tr>
+                <td colspan="2"><strong>Totales:</strong></td>
+                <td id="total-cantidad">{{formatNumber totalCantidad}}</td>
+                <td id="total-puntos">{{formatNumber totalPuntos}}</td>
+                <td id="total-precio-publico">{{formatNumber
+                    totalPrecioPublico
+                  }}</td>
+                <td id="total-precio-unidades">{{formatNumber
+                    totalPrecioUnidades
+                  }}</td>
+              </tr>
+              <tr>
+                <td colspan="5"><strong>Total ganancia:</strong></td>
+                <td id="total-ganancia">{{formatNumber totalGanancia}}</td>
+              </tr>
+              <tr>
+                <td colspan="5"><strong>Total a pagar:</strong></td>
+                <td id="total-precio-nivel">{{formatNumber
+                    totalPrecioNivel
+                  }}</td>
+              </tr>
+
+            </div>
+          </tfoot>
+        </table>
+        <button id="botonadd">Agregar Producto</button>
+        <button id="botonpdf">Descargar Factura</button>
+        {{! <button id="botoncsv" onclick="window.location.href='/uploads'">Cargar
+          otro Archivo</button> }}
+        <button id="botonadvice" style="display:none;">Volver a Asesores</button>
+      </div>
+      <script src="/js/pdf.js"></script>
+      <script src="/js/edit.js"></script>
+      <script src="/js/delete.js"></script>
+      <script src="/js/totals.js"></script>
+      <script src="/js/add.js"></script>
+    </main>
+  </body>
+
+</html>
