@@ -37,7 +37,7 @@ hbs.registerHelper("sumarValores", function (productos, campo) {
 hbs.registerHelper("formatNumber", function (value) {
   if (typeof value === "string") {
     // Intenta convertir la cadena a número
-    value = parseFloat(value.replace(",", ".")); // Si los decimales usan coma, cambiarla a punto
+    value = parseFloat; // Si los decimales usan coma, cambiarla a punto
   }
 
   if (typeof value === "number" && !isNaN(value)) {

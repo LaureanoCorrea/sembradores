@@ -12,6 +12,8 @@ document.getElementById("botoncsv").addEventListener("click", function () {
       showCancelButton: true,
       confirmButtonText: "Subir CSV",
       cancelButtonText: "Cancelar",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
       preConfirm: () => {
         const ciclo = document.getElementById("ciclo").value;
         const semana = document.getElementById("semana").value;

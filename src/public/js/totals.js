@@ -13,44 +13,74 @@ function updateSubtotals() {
   const rows = document.querySelectorAll("#order_details_table tbody tr");
 
   rows.forEach((row) => {
-    totalCantidad += parseFloat(parseFormattedNumber(row.querySelector(".cantidad-unidades").textContent.trim()));
-    totalPuntos += parseFloat(parseFormattedNumber(row.querySelector(".puntos").textContent.trim()));
-    totalPrecioPublico += parseFloat(parseFormattedNumber(row.querySelector(".precio-publico").textContent.trim()));
-    totalPrecioUnidades += parseFloat(parseFormattedNumber(row.querySelector(".precio-x-unidades").textContent.trim()));
-    totalGanancia += parseFloat(parseFormattedNumber(row.querySelector(".ganancia").textContent.trim()));
-    totalPrecioNivel += parseFloat(parseFormattedNumber(row.querySelector(".precio-x-nivel").textContent.trim()));
+    const cantidadUnidades = parseFloat(row.querySelector(".unidades").textContent.trim().replace(',', ''));
+    const puntos = parseFloat(row.querySelector(".puntos").textContent.trim().replace(',', ''));
+    const precioPublico = parseFloat(row.querySelector(".pPublico").textContent.trim().replace(',', ''));
+    const nivelAsesor = row.dataset.nivelAsesor;
+
+    const precioXUnidades = cantidadUnidades * precioPublico;
+
+    const { precioPorNivel, ganancia } = calculatePriceAndProfit(precioPublico, cantidadUnidades, nivelAsesor, puntos);
+
+    row.querySelector(".pUnidades").textContent = formatCurrency(precioXUnidades);
+    row.querySelector(".pPublico").textContent = formatCurrency(precioPublico);
+    row.querySelector(".puntos").textContent = (puntos);
+    row.querySelector(".ganancia").textContent = formatCurrency(ganancia);
+    row.querySelector(".pNivel").textContent = formatCurrency(precioPorNivel);
+
+    totalCantidad += cantidadUnidades;
+    totalPuntos += puntos;
+    totalPrecioPublico += precioPublico;
+    totalPrecioUnidades += precioXUnidades;
+    totalGanancia += ganancia;
+    totalPrecioNivel += precioPorNivel;
   });
 
-  document.getElementById("total-cantidad").textContent = formatNumber(totalCantidad);
-  document.getElementById("total-puntos").textContent = formatNumber(totalPuntos);
-  document.getElementById("total-precio-publico").textContent = formatCurrency(totalPrecioPublico);
-  document.getElementById("total-precio-unidades").textContent = formatCurrency(totalPrecioUnidades);
-  document.getElementById("total-ganancia").textContent = formatCurrency(totalGanancia);
-  document.getElementById("total-precio-nivel").textContent = formatCurrency(totalPrecioNivel);
+  document.getElementById("tCantidad").textContent = (totalCantidad);
+  document.getElementById("tPuntos").textContent = (totalPuntos);
+  // document.getElementById("tPublico").textContent = formatCurrency(totalPrecioPublico);
+  document.getElementById("tUnidades").textContent = formatCurrency(totalPrecioUnidades);
+  document.getElementById("tGanancia").textContent = formatCurrency(totalGanancia);
+  document.getElementById("tNivel").textContent = formatCurrency(totalPrecioNivel);
 }
 
-function parseFormattedNumber(value) {
-  // Reemplazar comas por puntos para los decimales y eliminar otros caracteres no numéricos
-  const cleanedValue = value.replace(/[^\d,.-]/g, "").replace(/,/g, ".");
-  const number = parseFloat(cleanedValue);
+function calculatePriceAndProfit(precioPublico, cantidadUnidades, nivelAsesor, puntos) {
+  let precioPorUnidades = precioPublico * cantidadUnidades;
+  let precioPorNivel;
+  let ganancia;
 
-  return isNaN(number) ? 0 : number;
-}
+  if (parseFloat(puntos) === 0) {
+    precioPorNivel = precioPorUnidades;
+    ganancia = 0;
+  } else {
+    switch (nivelAsesor) {
+      case "Pedido Asesor Plata":
+        precioPorNivel = precioPublico * 0.7 * cantidadUnidades;
+        break;
+      case "Pedido Asesor Oro":
+        precioPorNivel = precioPublico * 0.65 * cantidadUnidades;
+        break;
+      case "Pedido Coordinador":
+        precioPorNivel = precioPublico * 0.65 * 0.9 * cantidadUnidades;
+        break;
+      default:
+        precioPorNivel = precioPorUnidades;
+        break;
+    }
+    ganancia = precioPorUnidades - precioPorNivel;
+  }
 
-function formatNumber(number) {
-  // Formatear número con separador de miles usando coma
-  return number.toLocaleString('es-ES', {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-    useGrouping: false,
-  }).replace(/\./g, ',');
+  return { precioPorNivel, ganancia };
 }
 
 function formatCurrency(amount) {
-  // Formatear cantidad monetaria con separador de miles usando coma y dos decimales
-  return amount.toLocaleString('es-ES', {
-    minimumFractionDigits: 3,
-    maximumFractionDigits: 3,
+  return amount.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
     useGrouping: true
-  }).replace(/\./g, ',');
+  });
+}
+
+function formatNumber(number) {
+  return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

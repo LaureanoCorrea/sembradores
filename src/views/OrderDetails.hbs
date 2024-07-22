@@ -47,6 +47,8 @@
             </tr>
           </thead>
           <tbody>
+
+            
             {{#each Productos}}
               <tr
                 data-asesor-id="{{AsesorId}}"
@@ -56,23 +58,15 @@
               >
                 <td>{{getField this "Codigo de Producto"}}</td>
                 <td>{{getField this "Nombre de Producto"}}</td>
-                <td class="cantidad-unidades">{{getField
-                    this
-                    "Cantidad Unidades"
-                  }}</td>
+                <td class="unidades">{{getField this "Cantidad Unidades"}}</td>
                 <td class="puntos">{{getField this "Puntos"}}</td>
-                <td class="precio-publico">{{formatNumber
-                    (getField this "Precio Público")
+                <td class="pPublico">{{getField this "Precio Público"}}</td>
+                <td class="pUnidades">{{getField this "Precio x Unidades"}}</td>
+                <td class="pNivel">{{getField
+                    this
+                    "Precio x Nivel / Categoria"
                   }}</td>
-                <td class="precio-x-unidades">{{formatNumber
-                    (getField this "Precio x Unidades")
-                  }}</td>
-                <td class="precio-x-nivel">{{formatNumber
-                    (getField this "Precio x Nivel / Categoria")
-                  }}</td>
-                <td class="ganancia">{{formatNumber
-                    (getField this "Ganancia")
-                  }}</td>
+                <td class="ganancia">{{getField this "Ganancia"}}</td>
                 <td>
                   <button class="edit-item" data-item="{{_id}}">Editar</button>
                   <button
@@ -86,25 +80,21 @@
           <tfoot>
             <div>
               <tr>
+
+                
                 <td colspan="2"><strong>Totales:</strong></td>
-                <td id="total-cantidad">{{formatNumber totalCantidad}}</td>
-                <td id="total-puntos">{{formatNumber totalPuntos}}</td>
-                <td id="total-precio-publico">{{formatNumber
-                    totalPrecioPublico
-                  }}</td>
-                <td id="total-precio-unidades">{{formatNumber
-                    totalPrecioUnidades
-                  }}</td>
+                <td id="tCantidad">{{totalCantidad}}</td>
+                <td id="tPuntos">{{totalPuntos}}</td>
+                <td id="tPublico">{{totalPrecioPublico}}</td>
+                <td id="tUnidades">{{totalPrecioUnidades}}</td>
               </tr>
               <tr>
                 <td colspan="5"><strong>Total ganancia:</strong></td>
-                <td id="total-ganancia">{{formatNumber totalGanancia}}</td>
+                <td id="tGanancia">{{totalGanancia}}</td>
               </tr>
               <tr>
                 <td colspan="5"><strong>Total a pagar:</strong></td>
-                <td id="total-precio-nivel">{{formatNumber
-                    totalPrecioNivel
-                  }}</td>
+                <td id="tNivel">{{totalPrecioNivel}}</td>
               </tr>
 
             </div>
@@ -112,8 +102,6 @@
         </table>
         <button id="botonadd">Agregar Producto</button>
         <button id="botonpdf">Descargar Factura</button>
-        {{! <button id="botoncsv" onclick="window.location.href='/uploads'">Cargar
-          otro Archivo</button> }}
         <button id="botonadvice" style="display:none;">Volver a Asesores</button>
       </div>
       <script src="/js/pdf.js"></script>
